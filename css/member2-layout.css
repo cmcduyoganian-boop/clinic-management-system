@@ -1,0 +1,122 @@
+/* ============================================
+   MEMBER 2: LAYOUT & RESPONSIVE GRID SYSTEM
+   Author: Sheina Abegail Lala
+   Date: March 25, 2026
+   Contribution: CSS Grid Layout, Responsive Breakpoints
+   ============================================ */
+
+/* ---------- PAGE CONTAINER STYLES ---------- */
+.page {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Container - Login/Register forms */
+.container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: var(--bg-white);
+    padding: 2rem 1.8rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Dashboard wrapper */
+.dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    border-radius: 36px;
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+}
+
+/* ========== CSS GRID LAYOUT - MOBILE FIRST ========== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;  /* Single column on mobile */
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+}
+
+/* ========== TABLET BREAKPOINT (768px and up) ========== */
+@media (min-width: 768px) {
+    body {
+        padding: 1.5rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);  /* Two columns on tablet */
+    }
+    
+    .container {
+        padding: 2.5rem;
+    }
+}
+
+/* ========== DESKTOP BREAKPOINT (1024px and up) ========== */
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);  /* Three columns on desktop */
+    }
+    
+    .dashboard {
+        padding: 2rem;
+    }
+}
+
+/* ========== LARGE DESKTOP (1440px and up) ========== */
+@media (min-width: 1440px) {
+    .dashboard {
+        max-width: 1600px;
+    }
+    
+    .dashboard-grid {
+        gap: 2rem;
+    }
+}
+
+/* ========== MOBILE SMALL (iPhone SE - 375px and below) ========== */
+@media (max-width: 380px) {
+    .container, .dashboard {
+        padding: 1rem;
+    }
+    
+    .dashboard-grid {
+        gap: 1rem;
+    }
+}
+
+/* Navigation Bar Layout */
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 0.8rem 0.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+/* Grid Card Hover Effects */
+.grid-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.grid-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.15);
+}
