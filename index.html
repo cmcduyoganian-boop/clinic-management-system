@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MediFlow | Advanced Clinic System</title>
+    <link rel="stylesheet" href="css/member1-base.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- LOGIN -->
+<div id="login" class="container page active" role="dialog" aria-labelledby="login-heading">
+    <h2 id="login-heading">Sign in to MediFlow</h2>
+    <input type="text" id="username-input" placeholder="Username (admin / nurse)" aria-required="true">
+    <input type="password" id="password-input" placeholder="Password (any)">
+    <button onclick="handleLogin()">Login →</button>
+    <p>Don't have account? <a href="#" onclick="switchPage('register')">Register</a></p>
+    <div class="alert-message" id="loginStatusMsg"></div>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="container page" role="region">
+    <h2 id="reg-heading">Create Account</h2>
+    <input type="text" id="reg-username" placeholder="Desired Username">
+    <input type="password" id="reg-password" placeholder="Password">
+    <button onclick="registerUser()">Register</button>
+    <p>Already have account? <a href="#" onclick="switchPage('login')">Sign in</a></p>
+    <div id="regStatusMsg" class="alert-message"></div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin" class="dashboard page" role="main" id="main-content">
+    <div class="nav">
+        <h2>🏥 Admin Panel</h2>
+        <div class="nav-buttons">
+            <button onclick="switchPage('medicine')">💊 Medicine</button>
+            <button onclick="logoutUser()" class="btn-outline">Logout</button>
+        </div>
+    </div>
+    <p>Welcome, <strong id="adminUserName">Administrator</strong> — manage staff & analytics</p>
+    
+    <div class="dashboard-grid">
+        <div class="grid-card">
+            <h3>👥 Staff Activity</h3>
+            <div class="stats-list">
+                <div class="stat-item"><span class="stat-number">5</span><br>Doctors</div>
+                <div class="stat-item"><span class="stat-number">12</span><br>Nurses</div>
+                <div class="stat-item"><span class="stat-number">3</span><br>Admins</div>
+            </div>
+            <p>⭐ On-duty today: 8 staff members</p>
+        </div>
+        <div class="grid-card">
+            <h3>📋 Recent Visits</h3>
+            <ul>
+                <li>• Emma Watson — Flu consultation</li>
+                <li>• James Lee — Blood pressure check</li>
+                <li>• Maria Santos — Pediatric vaccine</li>
+            </ul>
+            <button onclick="alert('More records coming soon')">View all →</button>
+        </div>
+        <div class="grid-card">
+            <h3>📊 Monthly Reports</h3>
+            <div class="stat-item">Appointments: 246 ▲15%</div>
+            <div class="stat-item">Inventory status: 84%</div>
+            <button onclick="alert('Full analytics dashboard')">Generate report</button>
+        </div>
+    </div>
+</div>
+
+<!-- NURSE DASHBOARD -->
+<div id="nurse" class="dashboard page" role="main">
+    <div class="nav">
+        <h2>🩺 Nurse Station</h2>
+        <div class="nav-buttons">
+            <button onclick="switchPage('medicine')">💊 Medicine</button>
+            <button onclick="logoutUser()" class="btn-outline">Logout</button>
+        </div>
+    </div>
+    <p>Welcome, <strong id="nurseUserName">Nurse</strong> — manage patient vitals and queue.</p>
+    <div class="dashboard-grid">
+        <div class="grid-card">
+            <h3>⏳ Queue Today</h3>
+            <ul>
+                <li>1. Michael Cruz (09:30)</li>
+                <li>2. Sofia Rodriguez (10:00)</li>
+                <li>3. Oliver Chen (10:30)</li>
+            </ul>
+        </div>
+        <div class="grid-card">
+            <h3>❤️ Vitals Entry</h3>
+            <label for="bpInput">Blood Pressure:</label>
+            <input type="text" id="bpInput" placeholder="120/80">
+            <button onclick="alert(`BP logged: ${document.getElementById('bpInput').value}`)">Record Vitals</button>
+        </div>
+        <div class="grid-card">
+            <h3>💊 Dispensed Today</h3>
+            <ul class="medicine-list">
+                <li>Paracetamol 500mg — 8 units</li>
+                <li>Amoxicillin — 12 courses</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- MEDICINE DASHBOARD -->
+<div id="medicine" class="dashboard page">
+    <div class="nav">
+        <h2>💊 Formulary & Stock</h2>
+        <div class="nav-buttons">
+            <button onclick="goBackFromMedicine()">← Back</button>
+            <button onclick="logoutUser()" class="btn-outline">Logout</button>
+        </div>
+    </div>
+    <p>Essential medicines inventory — updated in real time</p>
+    <div class="dashboard-grid">
+        <div class="grid-card">
+            <h3>Essential Drugs</h3>
+            <ul class="medicine-list">
+                <li>Paracetamol <span>450 tablets</span></li>
+                <li>Ibuprofen <span>320 tablets</span></li>
+                <li>Amoxicillin <span>210 capsules</span></li>
+                <li>Loratadine <span>180 tablets</span></li>
+                <li>Metformin <span>95 packs</span></li>
+            </ul>
+        </div>
+        <div class="grid-card">
+            <h3>⚠️ Low Stock Alerts</h3>
+            <div class="stat-item">Amoxicillin: only 12 packs left</div>
+            <div class="stat-item">Ibuprofen syrup: 8 units</div>
+            <button onclick="alert('Reorder request sent')">Request Restock</button>
+        </div>
+        <div class="grid-card">
+            <h3>📅 Expiry Monitor</h3>
+            <p>Next expiry: Paracetamol syrup (Oct 2025)</p>
+            <progress value="30" max="100"></progress>
+            <p>30% items expiring within 6 months</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let lastDashboard = "admin";
+
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+            page.setAttribute('aria-hidden', 'true');
+        });
+        const activePage = document.getElementById(pageId);
+        if (activePage) {
+            activePage.classList.add('active');
+            activePage.setAttribute('aria-hidden', 'false');
+            const heading = activePage.querySelector('h2');
+            if (heading) {
+                heading.setAttribute('tabindex', '-1');
+                heading.focus();
+            }
+            if (pageId === 'admin' || pageId === 'nurse') {
+                lastDashboard = pageId;
+            }
+        }
+    }
+
+    function handleLogin() {
+        const usernameField = document.getElementById('username-input');
+        const username = usernameField ? usernameField.value.trim() : '';
+        const loginStatusDiv = document.getElementById('loginStatusMsg');
+
+        if (!username) {
+            loginStatusDiv.innerText = '❌ Please enter a username.';
+            usernameField.focus();
+            return;
+        }
+        if (username === 'admin') {
+            switchPage('admin');
+            loginStatusDiv.innerText = '';
+            usernameField.value = '';
+        } 
+        else if (username === 'nurse') {
+            switchPage('nurse');
+            loginStatusDiv.innerText = '';
+            usernameField.value = '';
+        }
+        else {
+            loginStatusDiv.innerText = '⚠️ Invalid role. Use "admin" or "nurse" (demo).';
+            usernameField.focus();
+        }
+    }
+
+    function registerUser() {
+        const regUser = document.getElementById('reg-username');
+        const regPass = document.getElementById('reg-password');
+        const regStatus = document.getElementById('regStatusMsg');
+        if (!regUser.value.trim()) {
+            regStatus.innerText = 'Username required.';
+            regUser.focus();
+            return;
+        }
+        if (!regPass.value.trim()) {
+            regStatus.innerText = 'Password required.';
+            regPass.focus();
+            return;
+        }
+        regStatus.innerText = '✅ Account created! Please login.';
+        setTimeout(() => {
+            switchPage('login');
+        }, 1200);
+        regUser.value = '';
+        regPass.value = '';
+    }
+
+    function logoutUser() {
+        const usernameField = document.getElementById('username-input');
+        if(usernameField) usernameField.value = '';
+        switchPage('login');
+        setTimeout(() => {
+            const userInput = document.getElementById('username-input');
+            if(userInput) userInput.focus();
+        }, 50);
+    }
+
+    function goBackFromMedicine() {
+        if (lastDashboard === 'nurse') {
+            switchPage('nurse');
+        } else {
+            switchPage('admin');
+        }
+    }
+
+    window.show = function(page) { switchPage(page); };
+    window.login = function() { handleLogin(); };
+    window.logout = function() { logoutUser(); };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const allPages = document.querySelectorAll('.page');
+        allPages.forEach(page => {
+            page.setAttribute('aria-live', 'polite');
+        });
+        const activeNow = document.querySelector('.page.active');
+        if(activeNow) activeNow.setAttribute('aria-hidden', 'false');
+        else document.getElementById('login')?.setAttribute('aria-hidden', 'false');
+    });
+</script>
+</body>
+</html>
