@@ -41,7 +41,7 @@ A responsive clinic management system with role-based dashboards (Admin, Nurse) 
 
 ## Member 3: UI Components
 **Author:** Junie Saludes
-**File:** `css/member3-components.css`
+**File:** `css/juniesaludes-components.css`
 
 ### Contributions:
 1. **Card Components** - Styled cards with hover effects
