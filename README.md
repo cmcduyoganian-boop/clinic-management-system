@@ -20,8 +20,8 @@ A responsive clinic management system with role-based dashboards (Admin, Nurse) 
 |--------|--------------|------|--------|
 | Member 1 | Global Styles & Reset | `css/member1-base.css` | ✅ Completed |
 | Member 2 | Layout & Responsive Grid | `css/member2-layout.css` | ✅ Completed |
-| Member 3 | UI Components | `css/juniesaludes-components.css` | ✅ Completed |
----
+| Member 3 | UI Components | `css/member3-components.css` | ✅ Completed |
+| Member 4 | Dashboard Specific Styles | `css/member4-dashboard.css` | ✅ Completed |
 
 **Created by:** Ian Duyogan - Member 1
 **Date:** March 25, 2026
@@ -52,6 +52,41 @@ A responsive clinic management system with role-based dashboards (Admin, Nurse) 
 6. **Progress Bar** - Custom styled progress indicator
 7. **Tooltip** - Hover tooltip effect
 8. **Loading Shimmer** - Animated loading effect
+
+## Member 4: Dashboard Specific Styles
+**Author:** Marie Joy Maritan
+**File:** `css/member4-dashboard.css`
+**Date:** March 26, 2026
+
+### Contributions:
+1. **Medicine List** - Styled inventory list with icons and hover effects
+2. **Patient Queue** - Queue list with status badges (waiting/checked)
+3. **Vitals Entry Form** - Form styles for recording patient vitals
+4. **Activity List** - Recent activities with icons and timestamps
+5. **Stock Alerts** - Low and critical stock warning components
+6. **Expiry Monitor** - Progress bar for medicine expiry tracking
+7. **Dashboard Footer** - Footer with last updated information
+8. **Responsive Adjustments** - Mobile-friendly dashboard styles
+
+### Code Snippet:
+```css
+.medicine-list li {
+    padding: 0.85rem 0.5rem;
+    border-bottom: 1px solid #e2edf2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.queue-status.waiting {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.queue-status.checked {
+    background: #d1fae5;
+    color: #065f46;
+}
 
 ### Code Snippet:
 ```css
