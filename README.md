@@ -22,6 +22,7 @@ A responsive clinic management system with role-based dashboards (Admin, Nurse) 
 | Member 2 | Layout & Responsive Grid | `css/member2-layout.css` | ✅ Completed |
 | Member 3 | UI Components | `css/member3-components.css` | ✅ Completed |
 | Member 4 | Dashboard Specific Styles | `css/member4-dashboard.css` | ✅ Completed |
+| Member 5 | Accessibility & Animations | `css/member5-accessibility.css` | ✅ Completed |
 
 **Created by:** Ian Duyogan - Member 1
 **Date:** March 25, 2026
@@ -67,6 +68,29 @@ A responsive clinic management system with role-based dashboards (Admin, Nurse) 
 6. **Expiry Monitor** - Progress bar for medicine expiry tracking
 7. **Dashboard Footer** - Footer with last updated information
 8. **Responsive Adjustments** - Mobile-friendly dashboard styles
+
+## Member 5: Accessibility & Animations
+**Author:** Noven Mangaron
+**File:** `css/member5-accessibility.css`
+**Date:** March 26, 2026
+
+### Contributions:
+1. **Keyboard Navigation** - Focus states for Tab and Enter keys
+2. **Skip Link** - Skip to main content for screen readers
+3. **High Contrast Mode** - Support for prefers-contrast media query
+4. **Reduced Motion** - Respects user motion preferences
+5. **ARIA States** - aria-hidden, aria-expanded, aria-disabled, aria-invalid, aria-required
+6. **Screen Reader Only** - .sr-only class for accessible text
+7. **Animation Keyframes** - fadeIn, slideIn, scaleIn, pulse, shimmer, spin, shake, checkmark
+8. **Loading States** - Loading spinners and shimmer effects
+9. **Error/Success Animations** - Shake and checkmark animations
+10. **Tooltip Accessibility** - Accessible tooltips
+11. **Print Styles** - Print-friendly layout
+12. **Custom Scrollbar** - Styled scrollbar
+13. **Text Selection** - Custom selection colors
+
+### Screenshot:
+![Member 5](screenshots/member5-contribution.png)
 
 ### Code Snippet:
 ```css
