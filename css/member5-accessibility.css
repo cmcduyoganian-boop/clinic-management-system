@@ -1,0 +1,394 @@
+/* ============================================
+   MEMBER 5: ACCESSIBILITY & ANIMATIONS
+   Author: Noven Mangaron
+   Date: March 26, 2026
+   Contribution: Focus states, ARIA support, Keyboard navigation, Animations
+   ============================================ */
+
+/* ========== KEYBOARD NAVIGATION FOCUS STATES ========== */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 4px;
+    border-radius: 8px;
+    transition: outline 0.1s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #fbbf24;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3);
+    background-color: #fef9e6;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ========== SKIP TO MAIN CONTENT LINK ========== */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    z-index: 1000;
+    text-decoration: none;
+    border-radius: 0 0 12px 12px;
+    font-weight: 600;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible {
+    top: 0;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== HIGH CONTRAST MODE SUPPORT ========== */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0000ee;
+        --primary-dark: #0000aa;
+        --secondary-color: #0088aa;
+        --bg-light: #ffffff;
+        --text-dark: #000000;
+        --border-light: #000000;
+    }
+    
+    .grid-card,
+    .container,
+    .dashboard {
+        border: 2px solid black;
+    }
+    
+    button,
+    .btn-outline {
+        border: 2px solid black;
+    }
+}
+
+/* ========== REDUCED MOTION PREFERENCE ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .grid-card:hover,
+    button:hover,
+    .stat-item:hover {
+        transform: none !important;
+    }
+}
+
+/* ========== ARIA STATES ========== */
+[aria-hidden="true"] {
+    display: none;
+}
+
+[aria-expanded="false"] + .expandable-content {
+    display: none;
+}
+
+[aria-expanded="true"] + .expandable-content {
+    display: block;
+}
+
+[role="dialog"] {
+    position: relative;
+    z-index: 100;
+}
+
+[role="button"] {
+    cursor: pointer;
+}
+
+[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+[aria-invalid="true"] {
+    border-color: #ef4444 !important;
+    background-color: #ffebee !important;
+}
+
+[aria-required="true"]::after {
+    content: " *";
+    color: #ef4444;
+}
+
+/* ========== SCREEN READER ONLY TEXT ========== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========== ANIMATION KEYFRAMES ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ========== ANIMATION CLASSES ========== */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.2s ease;
+}
+
+.animate-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* ========== LOADING STATES ========== */
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* ========== ERROR ANIMATION ========== */
+.input-error {
+    animation: shake 0.3s ease;
+    border-color: #ef4444 !important;
+    background-color: #ffebee !important;
+}
+
+/* ========== SUCCESS ANIMATION ========== */
+.success-check {
+    animation: checkmark 0.3s ease;
+}
+
+/* ========== TOOLTIP ACCESSIBILITY ========== */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]:focus-visible::after,
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-dark);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+    .nav,
+    button,
+    .skip-link {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .dashboard,
+    .container {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .grid-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* ========== TEXT SELECTION ========== */
+::selection {
+    background: var(--secondary-color);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* ========== FOCUS WITHIN ========== */
+.focus-within-shadow:focus-within {
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.5);
+    border-radius: 8px;
+}
